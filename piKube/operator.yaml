@@ -1,0 +1,22 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: pikube-hass
+  namespace: hip
+spec:
+  replicas: 1
+  strategy:
+    type: Recreate
+  selector:
+    matchLabels:
+      application: pikube-hass
+  template:
+    metadata:
+      labels:
+        application: pikube-hass
+    spec:
+      serviceAccountName: hip-operator
+      containers:
+        - name: pikube-hass
+          image: silvertoken/pikube-hass:0.0.1
